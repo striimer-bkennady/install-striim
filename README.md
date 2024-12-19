@@ -1,8 +1,10 @@
 # Striim Installation
   
-## Steps to install and configure Striim with Java (11) in a Linux machine.
+## Steps to install and configure Striim 5.x with Java (11).
 
-**Note:** These steps only apply to Linux OS (CentOs, Amazon Linux 2, Ubuntu, Debian, and RedHat). If you want to install Striim on Windows, please follow the [Windows Instructions](#Windows Installation).
+
+### Linux OS Installation
+[Windows Instructions](###Windows Installation)
 
 **Virtual Machine Configuration:** Please set up your VM with the subsequent specifications: 16 cores/CPU, 32 GB of RAM, and 100 GB of storage. Additionally, ensure that ports 9080 and 9081 are open in your VM.
 
@@ -23,16 +25,26 @@
       - `export product_key=12345566`
       - `export total_memory=16`
       - `export cluster_name=Striim_cluster`
-      - `export striim_version=5.0.2` Note: This is an optional environment variable and it is only needed if you want to install a specific version of Striim. If it is not set, the script will install Striim version 5.0.2. 
+      - `export striim_version=5.0.2` Note: This is an optional environment variable and it is only needed if you want to install a specific version of Striim. If it is not set, the script will install Striim version 5.0.2. Use the main branch for 4.x installations.
       
-4) Clone this repository in the home directory: `git clone https://github.com/striimer-bkennady/install-striim.git`
+4) Clone this repository into your home directory:
+
+   ```commandline
+   git clone -b install_v5.0.2 --single-branch https://github.com/striimer-bkennady/install-striim.git
+   ```
 
 5) Change directory to `striim-installs/install/`.
+   ```commandline
+      cd striim-install/install/
+   ```
 
-6) Execute striim-install.sh script: `./striim-install.sh`
+6) Execute striim-install.sh script: 
+   ```commandline
+      ./striim-install.sh
+   ```
 
 7) After the script installs Java and Striim, it will show a prompt for you to set your KeyStore, sys and admin user password. 
-    - Note: You will login to Striim console with the admin credentials you entered in this step.
+    - Note: You will login to Striim console with the admin credentials you enter in this step.
    
 8) Select '1' or 'Derby' when it asks you to enter the MDR Types.
             
@@ -43,7 +55,7 @@ Please go to http://10.1.2.3.4:9080 or https://10.1.2.3.4:9081 to administer, or
 
 If you don't see striim console up and running in your browser, make sure your instance has port 9080 open and your network is configured correctly.
 
-# Windows Installation
+### Windows Installation
 1) **Register** on this page and download the latest TGZ file and Windows Service Package file: [https://support.striim.com/hc/en-us/articles/229277848-Download-of-Latest-Version-of-Striim](https://support.striim.com/hc/en-us/articles/229277848-Download-of-Latest-Version-of-Striim)
 2) Unzip Striim TGZ file into your chosen installation directory
 3) Navigate to https://striim-downloads.striim.com/Releases/<striim_latest_version>/Striim_windowsService_<striim_latest_version>.zip to download the Window server package
