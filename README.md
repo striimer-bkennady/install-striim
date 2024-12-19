@@ -4,7 +4,7 @@
 
 
 ### Linux OS Installation
-[Windows Instructions](###Windows Installation)
+[Windows Instructions](### Windows Installation)
 
 **Virtual Machine Configuration:** Please set up your VM with the subsequent specifications: 16 cores/CPU, 32 GB of RAM, and 100 GB of storage. Additionally, ensure that ports 9080 and 9081 are open in your VM.
 
