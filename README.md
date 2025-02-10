@@ -25,7 +25,7 @@
       - `export product_key=12345566`
       - `export total_memory=16`
       - `export cluster_name=Striim_cluster`
-      - `export striim_version=5.0.2` Note: This is an optional environment variable and it is only needed if you want to install a specific version of Striim. If it is not set, the script will install Striim version 5.0.2. Use the main branch for 4.x installations.
+      - `export striim_version=5.0.2.2` Note: This is an optional environment variable and it is only needed if you want to install a specific version of Striim. If it is not set, the script will install Striim version 5.0.2. Use the main branch for 4.x installations.
       
 4) Clone this repository into your home directory:
 
