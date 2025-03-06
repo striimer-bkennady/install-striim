@@ -72,10 +72,14 @@ if [ $os == 'ubuntu' ] || [ $os == 'debian' ];
 then	
 	# Install Striim
 	echo "${GREEN} Install Striim Version ${striim_version} ${NC}"
-	curl -L https://striim-downloads.striim.com/Releases/$striim_version/striim-dbms-$striim_version-Linux.deb --output striim-dbms-$striim_version-Linux.deb ||
-        exit_with_error "Failed to download striim-dbms package"
-	curl -L https://striim-downloads.striim.com/Releases/$striim_version/striim-node-$striim_version-Linux.deb --output striim-node-$striim_version-Linux.deb ||
-        exit_with_error "Failed to download striim-node package"
+
+  if [ ! -f "striim-dbms-$striim_version-Linux.deb" ]; then
+        exit_with_error "Missing striim-dbms-$striim_version-Linux.deb package in the current directory"
+    fi
+    if [ ! -f "striim-node-$striim_version-Linux.deb" ]; then
+        exit_with_error "Missing striim-node-$striim_version-Linux.deb package in the current directory"
+    fi
+
 	sudo dpkg -i striim-dbms-$striim_version-Linux.deb ||
         exit_with_error "Failed to install striim-dbms package"
 	sudo dpkg -i striim-node-$striim_version-Linux.deb ||
@@ -85,10 +89,13 @@ then
 elif [ $os == 'centos' ] || [ $os == 'redhat' ] || [ $os == 'amazon' ] || [ $os == 'suse' ];
 then
 	echo "${GREEN} Install Striim Version $striim_version ${NC}"
-	curl -L https://striim-downloads.striim.com/Releases/$striim_version/striim-dbms-$striim_version-Linux.rpm --output striim-dbms-$striim_version-Linux.rpm ||
-        exit_with_error "Failed to download striim-dbms package"
-	curl -L https://striim-downloads.striim.com/Releases/$striim_version/striim-node-$striim_version-Linux.rpm --output striim-node-$striim_version-Linux.rpm ||
-        exit_with_error "Failed to download striim-node package"
+	if [ ! -f "striim-dbms-$striim_version-Linux.rpm" ]; then
+        exit_with_error "Missing striim-dbms-$striim_version-Linux.rpm package in the current directory."
+  fi
+  if [ ! -f "striim-node-$striim_version-Linux.rpm" ]; then
+      exit_with_error "Missing striim-node-$striim_version-Linux.rpm package in the current directory"
+  fi
+
 	sudo rpm -ivh striim-dbms-$striim_version-Linux.rpm ||
         exit_with_error "Failed to install striim-dbms package"
 	

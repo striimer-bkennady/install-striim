@@ -29,11 +29,23 @@
       - `export product_key=12345566`
       - `export total_memory=16`
       - `export cluster_name=Striim_cluster`
-      - `export striim_version=4.2.0.22A` Note: This is an optional environment variable and it is only needed if you want to install a specific version of Striim. If it is not set, the script will install Striim version 4.2.0.22A. 
+      - `export striim_version=4.2.0.22B` Note: This must match the version of Striim you have downloaded during step 6
       
-4) Clone this repository in the home directory: `git clone https://github.com/schowStriim/striim-installs.git`
+4) Clone this repository in the home directory:
+   ```commandline
+   git clone -b install_v4.x --single-branch https://github.com/striimer-bkennady/install-striim.git
+   ```
 
-5) Change directory to `striim-installs/install/`.
+5) Change directory to `install-striim/install/`.
+
+6) Download the Striim packages from the Downloads page on the [Striim Support Site](https://support.striim.com/hc/). 
+   Navigate to the previous versions page to download version 4.x and copy these files into the striim-install/install/ directory.
+   - Ubuntu & Debian
+     - Download the striim-dbms and striim-node .deb packages
+   - Centos, Redhat, Amazon, Suse
+     - Download the striim-dbms and striim-node .rpm packages
+   - Windows
+     - See installation instructions below
 
 6) Execute striim-install.sh script: `./striim-install.sh`
 
