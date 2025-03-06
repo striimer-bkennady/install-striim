@@ -25,7 +25,7 @@
       - `export product_key=12345566`
       - `export total_memory=16`
       - `export cluster_name=Striim_cluster`
-      - `export striim_version=5.0.6` Note: This is an optional environment variable and it is only needed if you want to install a specific version of Striim. If it is not set, the script will install Striim version 5.0.2. Use the main branch for 4.x installations.
+      - `export striim_version=5.0.6` Note: This must match the version of Striim you have downloaded during step 6
       
 4) Clone this repository into your home directory:
 
@@ -35,7 +35,7 @@
 
 5) Change directory to `striim-installs/install/`.
    ```commandline
-      cd striim-install/install/
+      cd install-striim/install/
    ```
 
 6) Download the Striim packages from the Downloads page on the [Striim Support Site](https://support.striim.com/hc/). 
