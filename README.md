@@ -25,7 +25,7 @@
       - `export product_key=12345566`
       - `export total_memory=16`
       - `export cluster_name=Striim_cluster`
-      - `export striim_version=5.0.2.2` Note: This is an optional environment variable and it is only needed if you want to install a specific version of Striim. If it is not set, the script will install Striim version 5.0.2. Use the main branch for 4.x installations.
+      - `export striim_version=5.0.6` Note: This is an optional environment variable and it is only needed if you want to install a specific version of Striim. If it is not set, the script will install Striim version 5.0.2. Use the main branch for 4.x installations.
       
 4) Clone this repository into your home directory:
 
@@ -38,20 +38,29 @@
       cd striim-install/install/
    ```
 
-6) Execute striim-install.sh script: 
+6) Download the Striim packages from the Downloads page on the [Striim Support Site](https://support.striim.com/hc/). 
+    Copy these files into the striim-install/install/ directory.
+   - Ubuntu & Debian
+     - Download the striim-dbms and striim-node .deb packages
+   - Centos, Redhat, Amazon, Suse
+     - Download the striim-dbms and striim-node .rpm packages
+   - Windows
+     - See installation instructions below
+
+7) Execute striim-install.sh script: 
    ```commandline
       ./striim-install.sh
    ```
 
-7) After the script installs Java and Striim, it will show a prompt for you to set your KeyStore, sys and admin user password. 
+8) After the script installs Java and Striim, it will show a prompt for you to set your KeyStore, sys and admin user password. 
     - Note: You will login to Striim console with the admin credentials you enter in this step.
    
-8) Select '1' or 'Derby' when it asks you to enter the MDR Types.
+9) Select '1' or 'Derby' when it asks you to enter the MDR Types.
             
-9) Wait until you get an output message like the following:
+10) Wait until you get an output message like the following:
 Please go to http://10.1.2.3.4:9080 or https://10.1.2.3.4:9081 to administer, or use console
 
-10) Grab your instance public IP and type the following to your browser: <public-ip>:9080
+11) Grab your instance public IP and type the following to your browser: <public-ip>:9080
 
 If you don't see striim console up and running in your browser, make sure your instance has port 9080 open and your network is configured correctly.
 

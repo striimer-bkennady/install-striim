@@ -49,12 +49,8 @@ elif [[ -z "$product_key" ]]; then
     exit_with_error "Must provide product_key in environment"
 elif [[ -z "$total_memory" ]]; then
     exit_with_error "Must provide total_memory in environment"
-fi
-
-if [[ -z "$striim_version" ]]; then
-    striim_version=5.0.2.2
-else
-    striim_version=$striim_version
+elif [[ -z "$striim_version" ]]; then
+    exit_with_error "Must provide $striim_version in environment"
 fi
 
 echo "Download Striim version $striim_version"
@@ -71,25 +67,35 @@ read os
 if [ $os == 'ubuntu' ] || [ $os == 'debian' ];
 then	
 	# Install Striim
-	echo "${GREEN} Install Striim Version ${striim_version} ${NC}"
-	curl -L https://striim-downloads.striim.com/Releases/$striim_version/striim-dbms-$striim_version-Linux.deb --output striim-dbms-$striim_version-Linux.deb ||
-        exit_with_error "Failed to download striim-dbms package"
-	curl -L https://striim-downloads.striim.com/Releases/$striim_version/striim-node-$striim_version-Linux.deb --output striim-node-$striim_version-Linux.deb ||
-        exit_with_error "Failed to download striim-node package"
+    echo "${GREEN} Checking Striim Version ${striim_version} ${NC}"
+
+    if [ ! -f "striim-dbms-$striim_version-Linux.deb" ]; then
+        exit_with_error "Missing striim-dbms-$striim_version-Linux.deb package in the current directory"
+    fi
+    if [ ! -f "striim-node-$striim_version-Linux.deb" ]; then
+        exit_with_error "Missing striim-node-$striim_version-Linux.deb package in the current directory"
+    fi
+
 	sudo dpkg -i striim-dbms-$striim_version-Linux.deb ||
         exit_with_error "Failed to install striim-dbms package"
 	sudo dpkg -i striim-node-$striim_version-Linux.deb ||
         exit_with_error "Failed to install striim-node package"
 	sudo apt-get install bc -y ||
         exit_with_error "Failed to install bc package"
+
 elif [ $os == 'centos' ] || [ $os == 'redhat' ] || [ $os == 'amazon' ] || [ $os == 'suse' ];
 then
-	echo "${GREEN} Install Striim Version $striim_version ${NC}"
-	curl -L https://striim-downloads.striim.com/Releases/$striim_version/striim-dbms-$striim_version-Linux.rpm --output striim-dbms-$striim_version-Linux.rpm ||
-        exit_with_error "Failed to download striim-dbms package"
-	curl -L https://striim-downloads.striim.com/Releases/$striim_version/striim-node-$striim_version-Linux.rpm --output striim-node-$striim_version-Linux.rpm ||
-        exit_with_error "Failed to download striim-node package"
-	sudo rpm -ivh striim-dbms-$striim_version-Linux.rpm ||
+	echo "${GREEN} Checking Striim Version $striim_version ${NC}"
+
+    if [ ! -f "striim-dbms-$striim_version-Linux.rpm" ]; then
+        exit_with_error "Missing striim-dbms-$striim_version-Linux.rpm package in the current directory."
+    fi
+    if [ ! -f "striim-node-$striim_version-Linux.rpm" ]; then
+        exit_with_error "Missing striim-node-$striim_version-Linux.rpm package in the current directory"
+    fi
+
+  # Install dbms package
+  sudo rpm -ivh striim-dbms-$striim_version-Linux.rpm ||
         exit_with_error "Failed to install striim-dbms package"
 	
 	# Installing bc package 
