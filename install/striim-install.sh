@@ -1,7 +1,7 @@
 #!/bin/bash
 ################################################################################################
 # DESCRIPTION: This bash script does the following:                                   	       #	 
-# 1) Installs Java JDK (1.8).                                                                  #
+# 1) Installs Java JDK (11).                                                                  #
 # 2) Installs Striim.                                                                          # 
 # 3) Sets up Striim configuration (startup.properties and runs sksConfig file).                #
 # 4) Creates a single or multiple Initial Load application(s). (Optional)		       #
@@ -49,12 +49,8 @@ elif [[ -z "$product_key" ]]; then
     exit_with_error "Must provide product_key in environment"
 elif [[ -z "$total_memory" ]]; then
     exit_with_error "Must provide total_memory in environment"
-fi
-
-if [[ -z "$striim_version" ]]; then
-    striim_version=4.2.0.22A
-else
-    striim_version=$striim_version
+elif [[ -z "$striim_version" ]]; then
+    exit_with_error "Must provide $striim_version in environment"
 fi
 
 echo "Download Striim version $striim_version"
@@ -71,25 +67,35 @@ read os
 if [ $os == 'ubuntu' ] || [ $os == 'debian' ];
 then	
 	# Install Striim
-	echo "${GREEN} Install Striim Version ${striim_version} ${NC}"
-	curl -L https://striim-downloads.striim.com/Releases/$striim_version/striim-dbms-$striim_version-Linux.deb --output striim-dbms-$striim_version-Linux.deb ||
-        exit_with_error "Failed to download striim-dbms package"
-	curl -L https://striim-downloads.striim.com/Releases/$striim_version/striim-node-$striim_version-Linux.deb --output striim-node-$striim_version-Linux.deb ||
-        exit_with_error "Failed to download striim-node package"
+    echo "${GREEN} Checking Striim Version ${striim_version} ${NC}"
+
+    if [ ! -f "striim-dbms-$striim_version-Linux.deb" ]; then
+        exit_with_error "Missing striim-dbms-$striim_version-Linux.deb package in the current directory"
+    fi
+    if [ ! -f "striim-node-$striim_version-Linux.deb" ]; then
+        exit_with_error "Missing striim-node-$striim_version-Linux.deb package in the current directory"
+    fi
+
 	sudo dpkg -i striim-dbms-$striim_version-Linux.deb ||
         exit_with_error "Failed to install striim-dbms package"
 	sudo dpkg -i striim-node-$striim_version-Linux.deb ||
         exit_with_error "Failed to install striim-node package"
 	sudo apt-get install bc -y ||
         exit_with_error "Failed to install bc package"
+
 elif [ $os == 'centos' ] || [ $os == 'redhat' ] || [ $os == 'amazon' ] || [ $os == 'suse' ];
 then
-	echo "${GREEN} Install Striim Version $striim_version ${NC}"
-	curl -L https://striim-downloads.striim.com/Releases/$striim_version/striim-dbms-$striim_version-Linux.rpm --output striim-dbms-$striim_version-Linux.rpm ||
-        exit_with_error "Failed to download striim-dbms package"
-	curl -L https://striim-downloads.striim.com/Releases/$striim_version/striim-node-$striim_version-Linux.rpm --output striim-node-$striim_version-Linux.rpm ||
-        exit_with_error "Failed to download striim-node package"
-	sudo rpm -ivh striim-dbms-$striim_version-Linux.rpm ||
+	echo "${GREEN} Checking Striim Version $striim_version ${NC}"
+
+    if [ ! -f "striim-dbms-$striim_version-Linux.rpm" ]; then
+        exit_with_error "Missing striim-dbms-$striim_version-Linux.rpm package in the current directory."
+    fi
+    if [ ! -f "striim-node-$striim_version-Linux.rpm" ]; then
+        exit_with_error "Missing striim-node-$striim_version-Linux.rpm package in the current directory"
+    fi
+
+  # Install dbms package
+  sudo rpm -ivh striim-dbms-$striim_version-Linux.rpm ||
         exit_with_error "Failed to install striim-dbms package"
 	
 	# Installing bc package 
@@ -108,15 +114,15 @@ else
 	exit_with_error "Wrong selection. Please enter either amazon, debian, ubuntu, centos or redhat."
 fi
 
-# Install Java JDK (1.8)
-echo "${GREEN} Install Java JDK 1.8 ${NC}"
-curl -0 -L https://striim-downloads.s3.us-west-1.amazonaws.com/jdk-8u341-linux-x64.tar.gz --output jdk-8u341-linux-x64.tar.gz ||
+# Install Java JDK (11)
+echo "${GREEN} Install Java JDK 11 ${NC}"
+curl -0 -L https://striim-download.s3.us-west-1.amazonaws.com/jdk-11.0.24_linux-x64_bin.tar.gz --output jdk-11.0.24_linux-x64_bin.tar.gz ||
     exit_with_error "Failed to download Java JDK package"
 mkdir -p /usr/lib/jvm
-tar zxvf jdk-8u341-linux-x64.tar.gz -C /usr/lib/jvm
+tar zxvf jdk-11.0.24_linux-x64_bin.tar.gz -C /usr/lib/jvm
 chmod -R 755 /usr/lib/jvm
-update-alternatives --install "/usr/bin/java" "java" "/usr/lib/jvm/jdk1.8.0_341/bin/java" 1
-update-alternatives --set java /usr/lib/jvm/jdk1.8.0_341/bin/java
+update-alternatives --install "/usr/bin/java" "java" "/usr/lib/jvm/jdk-11.0.24/bin/java" 1
+update-alternatives --set java /usr/lib/jvm/jdk-11.0.24/bin/java
 
 if [ -d "/opt/striim/lib" ]
 then
