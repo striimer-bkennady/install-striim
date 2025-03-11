@@ -35,7 +35,7 @@
    ```
 
 6) Download the Striim packages from the Downloads page on the [Striim Support Site](https://support.striim.com/hc/). 
-    Copy these files into the striim-install/install/ directory.
+    Copy these files into the install-striim/install/ directory.
    - Ubuntu & Debian
      - Download the striim-dbms and striim-node .deb packages
    - Centos, Redhat, Amazon, Suse
@@ -72,7 +72,7 @@ To troubleshoot any data pipeline/application errors and/or view detailed error 
     
 1) Access your Striim server terminal
     
-2) Go to striim-install/log_finder/. **For example:** cd ./striim-installs/log_finder/
+2) Go to install-striim/log_finder/. **For example:** cd ./install-striim/log_finder/
     
 3) Execute the striim_error_log_finder.sh shell script with the appropriate arguments.
 **Format:** ./striim_error_log_finder <striim.server.log dir path and filename> <application name/application component name>
