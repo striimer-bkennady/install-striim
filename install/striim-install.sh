@@ -1,7 +1,7 @@
 #!/bin/bash
 ################################################################################################
 # DESCRIPTION: This bash script does the following:                                   	       #	 
-# 1) Installs Java JDK (11).                                                                  #
+# 1) Installs Java JDK (17).                                                                  #
 # 2) Installs Striim.                                                                          # 
 # 3) Sets up Striim configuration (startup.properties and runs sksConfig file).                #
 # 4) Creates a single or multiple Initial Load application(s). (Optional)		       #
@@ -114,15 +114,15 @@ else
 	exit_with_error "Wrong selection. Please enter either amazon, debian, ubuntu, centos or redhat."
 fi
 
-# Install Java JDK (11)
-echo "${GREEN} Install Java JDK 11 ${NC}"
-curl -0 -L https://striim-download.s3.us-west-1.amazonaws.com/jdk-11.0.24_linux-x64_bin.tar.gz --output jdk-11.0.24_linux-x64_bin.tar.gz ||
+# Install Java JDK (17)
+echo "${GREEN} Install Java JDK 17 ${NC}"
+curl --fail --location --retry 5 -L https://storage.googleapis.com/striim-bd-public/openjdk-17.0.2_linux-x64_bin.tar.gz --output openjdk-17.0.2_linux-x64_bin.tar.gz ||
     exit_with_error "Failed to download Java JDK package"
 mkdir -p /usr/lib/jvm
-tar zxvf jdk-11.0.24_linux-x64_bin.tar.gz -C /usr/lib/jvm
+tar zxvf openjdk-17.0.2_linux-x64_bin.tar.gz -C /usr/lib/jvm
 chmod -R 755 /usr/lib/jvm
-update-alternatives --install "/usr/bin/java" "java" "/usr/lib/jvm/jdk-11.0.24/bin/java" 1
-update-alternatives --set java /usr/lib/jvm/jdk-11.0.24/bin/java
+update-alternatives --install "/usr/bin/java" "java" "/usr/lib/jvm/jdk-17.0.2/bin/java" 1
+update-alternatives --set java /usr/lib/jvm/jdk-17.0.2/bin/java
 
 if [ -d "/opt/striim/lib" ]
 then

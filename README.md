@@ -1,6 +1,6 @@
 # Striim Installation
   
-## Steps to install and configure Striim 5.x with Java (11).
+## Steps to install and configure Striim 5.x with Java (17).
 
 
 ### Linux OS Installation
@@ -25,7 +25,7 @@
       - `export product_key=12345566`
       - `export total_memory=16`
       - `export cluster_name=Striim_cluster`
-      - `export striim_version=5.2.0.4` Note: This must match the version of Striim you have downloaded during step 6
+      - `export striim_version=5.4.0.1` Note: This must match the version of Striim you have downloaded during step 6
       
 4) Clone this repository in the home directory: `git clone https://github.com/striimer-bkennady/install-striim.git`
 
