@@ -29,7 +29,7 @@
       
 4) Clone this repository in the home directory: `git clone https://github.com/striimer-bkennady/install-striim.git`
 
-5) Change directory to `striim-installs/install/`.
+5) Change directory to `install-striim/install/`.
    ```commandline
       cd install-striim/install/
    ```
