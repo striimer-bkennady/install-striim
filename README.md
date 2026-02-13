@@ -38,7 +38,7 @@
     Copy these files into the install-striim/install/ directory.
    - Ubuntu & Debian
      - Download the striim-dbms and striim-node .deb packages
-   - Centos, Redhat, Amazon, Suse
+   - Redhat, Amazon, Suse
      - Download the striim-dbms and striim-node .rpm packages
    - Windows
      - See installation instructions below

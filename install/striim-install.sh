@@ -8,7 +8,7 @@
 # 5) Enables/Starts Striim dbms and node.                                                      #
 #                                                                                              # 
 # PRE-REQUISITE:                                                                               #
-# 1) This script is only for Ubuntu, CentOS, Amazon Linux, Debian, Suse and RedHat operating   #
+# 1) This script is only for Ubuntu, Amazon Linux, Debian, Suse and RedHat operating   #
 #    system. 										       #
 # 2) Need to export your license information (example shown below) as environment variables    # 
 #    before executing this script.                                                             # 
@@ -61,7 +61,7 @@ echo "# Welcome to Striim! #"
 echo "######################"
 
 echo "Please answer the following to get started with the installation process."
-echo "Which operating system are you using? (amazon, centos, redhat, ubuntu, suse or debian)"
+echo "Which operating system are you using? (amazon, redhat, ubuntu, suse or debian)"
 read os
 
 if [ $os == 'ubuntu' ] || [ $os == 'debian' ];
@@ -83,7 +83,7 @@ then
 	sudo apt-get install bc -y ||
         exit_with_error "Failed to install bc package"
 
-elif [ $os == 'centos' ] || [ $os == 'redhat' ] || [ $os == 'amazon' ] || [ $os == 'suse' ];
+elif [ $os == 'redhat' ] || [ $os == 'amazon' ] || [ $os == 'suse' ];
 then
 	echo "${GREEN} Checking Striim Version $striim_version ${NC}"
 
@@ -111,7 +111,7 @@ then
 	sudo rpm -ivh striim-node-$striim_version-Linux.rpm ||
         exit_with_error "Failed to install striim-node package \n Storage Space Size: $(df -h /opt | awk 'NR==2 {print $2}') \n Used Space: $(df -h /opt | awk 'NR==2 {print $3}') \n Preferred Storage Size for Striim: 100.0G"
 else
-	exit_with_error "Wrong selection. Please enter either amazon, debian, ubuntu, centos or redhat."
+	exit_with_error "Wrong selection. Please enter either amazon, debian, ubuntu or redhat."
 fi
 
 # Install Java JDK (17)
