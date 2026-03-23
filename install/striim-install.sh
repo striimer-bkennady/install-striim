@@ -19,8 +19,8 @@
 # export cluster_name=<value>                                                                  #
 # export company_name=<value>                                                                  #
 # export total_memory=<value>                                                                  #
-# (Optional) export striim_version=<value> Note: You only need to set this env var if you      #
-#                                                want to install a previous version of Striim  #
+# export striim_version=<value> Note: You only need to set this env var if you                 #
+#                                     want to install a previous version of Striim             #
 ################################################################################################
 GREEN=$'\e[0;32m'
 RED=$'\e[0;31m'
