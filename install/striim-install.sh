@@ -116,13 +116,13 @@ fi
 
 # Install Java JDK (17)
 echo "${GREEN} Install Java JDK 17 ${NC}"
-curl --fail --location --retry 5 -L https://storage.googleapis.com/striim-bd-public/openjdk-17.0.2_linux-x64_bin.tar.gz --output openjdk-17.0.2_linux-x64_bin.tar.gz ||
+curl --fail --location --retry 5 -L https://storage.googleapis.com/striim-bd-public/OpenJDK17U-jdk_x64_linux_hotspot_17.0.19_10.tar.gz --output OpenJDK17U-jdk_x64_linux_hotspot_17.0.19.tar.gz ||
     exit_with_error "Failed to download Java JDK package"
 mkdir -p /usr/lib/jvm
-tar zxvf openjdk-17.0.2_linux-x64_bin.tar.gz -C /usr/lib/jvm
+tar zxvf OpenJDK17U-jdk_x64_linux_hotspot_17.0.19.tar.gz -C /usr/lib/jvm
 chmod -R 755 /usr/lib/jvm
-update-alternatives --install "/usr/bin/java" "java" "/usr/lib/jvm/jdk-17.0.2/bin/java" 1
-update-alternatives --set java /usr/lib/jvm/jdk-17.0.2/bin/java
+update-alternatives --install "/usr/bin/java" "java" "/usr/lib/jvm/jdk-17.0.19+10/bin/java" 1
+update-alternatives --set java /usr/lib/jvm/jdk-17.0.19+10/bin/java
 
 if [ -d "/opt/striim/lib" ]
 then
